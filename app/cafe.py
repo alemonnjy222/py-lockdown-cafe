@@ -9,13 +9,13 @@ from app.errors import (
 class Cafe:
     def __init__(self, name: str):
         self.name = name
+        
+     if "vaccine" not in visitor:
+            raise NotVaccinatedError("Visitor is not vaccinated")
 
-    def visit_cafe(self, visitor: dict):
+    def visit_cafe(self, visitor: dict) -> str:
         if not visitor.get("wearing_a_mask", False):
             raise NotWearingMaskError("Visitor is not wearing a mask")
-
-        if "vaccine" not in visitor:
-            raise NotVaccinatedError("Visitor is not vaccinated")
 
         expiration_date = visitor["vaccine"].get("expiration_date")
 
