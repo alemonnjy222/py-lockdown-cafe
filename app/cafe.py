@@ -8,7 +8,7 @@ from app.errors import (
 
 
 class Cafe:
-    def __init__(self, name: Cafe):
+    def __init__(self, name: str):
         self.name = name
 
     def visit_cafe(self, visitor: dict) -> str:
@@ -17,7 +17,10 @@ class Cafe:
             raise NotVaccinatedError("Visitor is not vaccinated")
         
         expiration_date = visitor["vaccine"].get("expiration_date")
-
+        
+        if expiration_date is None:
+            raise OutdatedVaccineError("Vaccine is outdated")
+    
         if isinstance(expiration_date, str):
             expiration_date = datetime.strptime(expiration_date, "%Y-%m-%d").date()
 
